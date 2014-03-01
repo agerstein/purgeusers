@@ -5,13 +5,18 @@
 # when calling the script, you have to feed it a username to ignore - it could
 # be the last user in, or it can be anything you want (i.e. "randomu1")
 
-`cd /Users`;	#moe into the /Users directory
-#$homes=`ls /Users | grep -v -x "Shared" | grep -v -x "flamacadmin" | grep -v -x "acc" | grep -v -x @ARGV[0]`;
-# list the folders found in $root that aren't Shared, flamacadmin, acc, and put them into an array (@homes)
+`cd /Users`;	#move into the /Users directory
+#$homes=`ls /Users | grep -v -x "Shared" | grep -v -x "acc" | grep -v -x @ARGV[0]`;
+# list the folders found in $root that aren't Shared, acc, and put them into an array (@homes)
 
-#$homes=`find /Users -maxdepth 1 -newermt "2012-01-01 00:00" | grep -v -x "Shared" | grep -v -x "flamacadmin" | grep -v -x "acc"`; # | grep -v -x @ARGV[0]
-$homes=`find /Users -maxdepth 1 -mtime +7 | grep -v -x "Shared" | grep -v -x "flamacadmin" | grep -v -x "acc"`; # | grep -v -x @ARGV[0]
-# returns like: /Users/yankowskia2 
+#$homes=`find /Users -maxdepth 1 -newermt "2012-01-01 00:00" | grep -v -x "Shared" | grep -v -x "acc"`;
+# | grep -v -x @ARGV[0]
+$homes=`find /Users -maxdepth 1 -mtime +7 | grep -v -x "Shared" | grep -v -x "acc"`;
+# lists the top level of the /Users directory (-maxdepth 1)
+# lists the directories not accessed in the last 7 days (-mtime +7)
+# ignores certain results (grep -v -x "Shared")
+
+# returns in the format: /Users/username 
 
 # to export the list of users that's deleted?
 #open (EXPORT,'>>/Users/acc/export.txt');# or die 'can\'t open file';
